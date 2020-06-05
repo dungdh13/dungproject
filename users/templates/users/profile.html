@@ -1,11 +1,10 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
-{% load qr_tags %}
 {% block content %}
 
     <div class="content-section">
         <div class="media-body">
-        {% qr_from_text "https://www.vnch.vn/admin/users/todo/?q="|add:user.username "size" %}
+        
           <p class="text-secondary">Tên đăng nhập: {{ user.username }}</p>
           <p class="text-secondary">Họ và tên: {{ user.profile.Ho_ten }}</p>
           <p class="text-secondary">Số điện thoại: {{ user.profile.sdt }}</p>
