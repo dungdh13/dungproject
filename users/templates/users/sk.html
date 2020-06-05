@@ -1,0 +1,120 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <h4>Khai báo tình trạng sức khỏe</h4>
+        </div>
+    </div>
+
+    {% if user.profile.Ho_ten and user.profile.sdt and user.profile.khoa_phong %}
+    <div class="row justify-content-center mt-10">
+        <div class="col-md-20">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <p>{% now "jS F Y H:i" %}</p>
+                <p>Tích vào các ô dưới đây nếu thấy đúng với bản thân:</p>
+                <div class="form-group form-check">
+                    <input type="checkbox" name="sot" class="form-check-input" id="sot">
+                    <label class="form-check-label" for="sot">Có triệu chứng sốt. Nhiệt độ:&emsp;</label>
+                    <input type="number" name="nhiet_do" class="form-check-input" id="nhiet_do" value="37.0" step=0.1>
+                    <label class="form-check-label" for="nhiet_do"></label>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" name="ho" class="form-check-input" id="ho">
+                    <label class="form-check-label" for="ho">Có triệu chứng ho</label>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" name="kho_tho" class="form-check-input" id="kho_tho">
+                    <label class="form-check-label" for="kho_tho">Có triệu chứng khó thở</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_hong" class="form-check-input" id="dau_hong">
+                    <label class="form-check-label" for="dau_hong">Có triệu chứng đau họng</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="met_moi" class="form-check-input" id="met_moi">
+                    <label class="form-check-label" for="met_moi">Có triệu chứng mệt mỏi</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_dau" class="form-check-input" id="dau_dau">
+                    <label class="form-check-label" for="dau_dau">Có triệu chứng đau đầu</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="ret_run" class="form-check-input" id="ret_run">
+                    <label class="form-check-label" for="ret_run">Có triệu chứng rét run</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_co" class="form-check-input" id="dau_co">
+                    <label class="form-check-label" for="dau_co">Có triệu chứng đau cơ</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="non" class="form-check-input" id="non">
+                    <label class="form-check-label" for="non">Có triệu chứng nôn</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="buon_non" class="form-check-input" id="buon_non">
+                    <label class="form-check-label" for="buon_non">Có triệu chứng buồn nôn</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="yeutodichte" class="form-check-input" id="yeutodichte">
+                    <label class="form-check-label" for="yeutodichte"> Yếu tố dịch tễ(trong vòng 14 ngày qua, Ông/Bà hoặc người thân đến/qua/ở/đi từ Hạ Lôi-Mê Linh-Hà Nội, Thường Tín-Hà Nội, Chợ hoa Quảng Bá, Công ty SamSung-Bắc Ninh; các bệnh viện: Thận-Hà Nội, Đức Giang-Hà Nội, Việt Pháp,
+                    Đa khoa tỉnh Hà Nam, Huyết học và Truyền máu Trung Ương, Phụ Sản Hà Nội, Bệnh viện Bạch Mai từ ngày 12/3-27/3 hoặc các vùng có dịch tễ Covid19 không?)
+                    </label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="vung_dich" class="form-check-input" id="vung_dich">
+                    <label class="form-check-label" for="vung_dich"> Có tiền sử đến/qua/ở/về từ quốc gia, vùng lãnh thổ có ghi nhận ca mắc COVID-19 lây truyền nội địa (local transmission) theo thông tin của Tổ chức Y tế thế giới trong vòng 14 ngày kể từ ngày nhập cảnh</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="tiepxuc_f0" class="form-check-input" id="tiepxuc_f0">
+                    <label class="form-check-label" for="tiepxuc_f0">Có tiền sử đến/ở/về từ nơi có ổ dịch đang hoạt động tại Việt Nam trong vòng 14 ngày trước khi khởi phát bệnh. Các Viện Vệ sinh dịch tễ/Pasteur hàng ngày tổng hợp danh sách nơi có ổ dịch đang hoạt động thuộc khu vực phụ trách gửi về Cục Y tế dự phòng để thông báo cho các địa phương khai thác thông tin dịch tễ.</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="tiepxuc_f1" class="form-check-input" id="tiepxuc_f1">
+                    <label class="form-check-label" for="tiepxuc_f1">Tiếp xúc gần với ca bệnh xác định hoặc ca bệnh nghi ngờ trong vòng 14 ngày trước khi khởi phát bệnh</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="tt_banthan">Xác định tình trạng của bản thân về COVID-19</label>
+                    <input type="text" name="tt_banthan" class="form-control" list="tt_banthan" required>
+                    <datalist id="tt_banthan">
+                        <option value="F0">
+                        <option value="F1">
+                        <option value="F2">
+                        <option value="F3">
+                        <option value="F4">
+                        <option value="Chẩn đoán Nhiễm COVID-19">
+                        <option value="Xét nghiệm dương tính với virus corona chủng mới">
+                        <option value="Không tiếp xúc với nguồn lây">
+                    </datalist>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Lưu</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-30">
+        <a href="{% url 'profile' %}" style="font-size: 30px">Bạn cần khai báo đầy đủ thông tin cá nhân: Họ tên, Số điện thoại, Khoa Phòng</a>
+    </div>
+    {% endif %}
+
+{% endblock %}

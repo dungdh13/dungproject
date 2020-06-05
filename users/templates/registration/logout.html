@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Bạn đã đăng xuất khỏi tài khoản</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+               <a class="ml-2" href="{% url 'login' %}">Đăng Nhập Lại</a>
+            </small>
+        </div>
+      
+{% endblock content %}

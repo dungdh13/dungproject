@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load qr_tags %}
+{% block content %}
+
+    <div class="content-section">
+        <div class="media-body">
+        {% qr_from_text "https://www.vnch.vn/admin/users/todo/?q="|add:user.username "size" %}
+          <p class="text-secondary">Tên đăng nhập: {{ user.username }}</p>
+          <p class="text-secondary">Họ và tên: {{ user.profile.Ho_ten }}</p>
+          <p class="text-secondary">Số điện thoại: {{ user.profile.sdt }}</p>
+          <p class="text-secondary">Khoa Phòng: {{ user.profile.khoa_phong }}</p>
+          <p class="text-secondary">Emai: {{ user.email }}</p>
+          <p class="text-secondary">Địa chỉ: {{ user.profile.dia_chi }}</p>
+          <p class="text-secondary">Mã số bệnh nhân(bệnh nhân): {{ user.profile.MSBN }}</p>
+          <p class="text-secondary">Chuẩn đoán bệnh(bệnh nhân): {{ user.profile.cd_benh }}</p>
+          <p class="text-secondary">Lịch hẹn khám tiếp(bệnh nhân): {{ user.profile.lich_hen_kham }}</p>
+      </div>
+    </div>
+      <!-- FORM HERE -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Cập nhật thông tin cá nhân dưới đây</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Cập Nhật  </button>
+        </div>
+    </form>
+    </div>
+
+
+{% endblock content %}

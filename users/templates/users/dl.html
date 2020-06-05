@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if dl %}
+            <div class="list-group">
+                <ul>
+                {% for d in dl %}
+                <li>
+                   <a href="{{d.specifications.url}}">{{ d.title }}</a>
+                </li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Bạn chưa co file download.</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'download' %}">CẬp nhat</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}

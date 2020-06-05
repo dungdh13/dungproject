@@ -1,0 +1,106 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <h2>Cập nhật khai báo Sức Khỏe</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            {% if error %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="sot" class="form-check-input" id="sot" {% if todo.sot %}checked{% endif %}>
+                    <label class="form-check-label" for="sot">Sốt&emsp;Nhiệt độ: &emsp;</label>
+                    <input type="interger" name="nhiet_do" class="form-check-input" id="nhiet_do" value= "{{ todo.nhiet_do }}">
+                    <label class="form-check-label" for="nhiet_do"></label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="ho" class="form-check-input" id="ho" {% if todo.ho %}checked{% endif %}>
+                    <label class="form-check-label" for="ho">Ho</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="kho_tho" class="form-check-input" id="kho_tho" {% if todo.kho_tho %}checked{% endif %}>
+                    <label class="form-check-label" for="kho_tho">Khó thở</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_hong" class="form-check-input" id="dau_hong" {% if todo.dau_hong %}checked{% endif %}>
+                    <label class="form-check-label" for="dau_hong">Đau họng</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="met_moi" class="form-check-input" id="met_moi" {% if todo.met_moi %}checked{% endif %}>
+                    <label class="form-check-label" for="met_moi">Mệt mỏi</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_dau" class="form-check-input" id="dau_dau" {% if todo.kho_tho %}checked{% endif %}>
+                    <label class="form-check-label" for="dau_dau">Đau đầu</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="ret_run" class="form-check-input" id="ret_run" {% if todo.ret_run %}checked{% endif %}>
+                    <label class="form-check-label" for="ret_run">Rét run</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="dau_co" class="form-check-input" id="dau_co" {% if todo.dau_co %}checked{% endif %}>
+                    <label class="form-check-label" for="dau_co">Đau cơ</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="non" class="form-check-input" id="non" {% if todo.non %}checked{% endif %}>
+                    <label class="form-check-label" for="non">Nôn</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="buon_non" class="form-check-input" id="buon_non" {% if todo.buon_non %}checked{% endif %}>
+                    <label class="form-check-label" for="buon_non">Buồn nôn</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="yeutodichte" class="form-check-input" id="yeutodichte" {% if todo.yeutodichte %}checked{% endif %}>
+                    <label class="form-check-label" for="yeutodichte">Có yếu tố dịch tễ</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="vung_dich" class="form-check-input" id="vung_dich" {% if todo.vung_dich %}checked{% endif %}>
+                    <label class="form-check-label" for="vung_dich">Đi về từ quốc gia- lãnh thổ có dịch</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="tiepxuc_f0" class="form-check-input" id="tiepxuc_f0" {% if todo.tiepxuc_f0 %}checked{% endif %}>
+                    <label class="form-check-label" for="tiepxuc_f0">Vùng dịch</label>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" name="tiepxuc_f1" class="form-check-input" id="tiepxuc_f1" {% if todo.tiepxuc_f1 %}checked{% endif %}>
+                    <label class="form-check-label" for="tiepxuc_f0">F0-F1</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="tt_banthan">xác định tình trạng bản thân </label>
+                    <input type="text" name="tt_banthan" class="form-control" id="tt_banthan" value="{{ todo.tt_banthan }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" onclick="$('#delete').click()">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <form style='display: none;' method="POST" action="{% url 'deletetodo' todo.id %}">
+        {% csrf_token %}
+        <button id="delete" type="submit">Delete</button>
+    </form>
+{% endblock %}

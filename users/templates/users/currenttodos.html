@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+   
+
+    
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {%  if todo_last.sot or todo_last.ho or todo_last.dau_hong or todo_last.met_moi or todo_last.dau_dau or todo_last.ret_run or todo_last.dau_co or todo_last.non or todo_last.buon_non or todo_last.nhiet_do > 37.6 %}
+        <h1 style="color:red;">Bạn cần tư vấn y tế </h1>
+        {% else %}
+        <h1 style="color:green;"> Bạn đủ điều kiện sức khỏe </h1>
+        {% endif %}
+        {% if todos %}
+            <div class="list-group">
+                {% for todo in todos %}
+                <a href="{% url 'viewtodo' todo.id %}" class="list-group-item list-group-item-action ">{{ todo.created }}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Bạn chưa cập nhật sức khỏe lần nào.</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'sk' %}">CẬP NHẬT</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
