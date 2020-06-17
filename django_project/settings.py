@@ -25,7 +25,7 @@ SECRET_KEY = 'loudxp9)3ve+wdg1p=)44h*-%3*3o+9pvmqcqd20of-(9wn6t2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cnttbvk.pythonanywhere.com', 'www.vnch.vn','127.0.0.1']
+ALLOWED_HOSTS = ['cnttbvk.pythonanywhere.com', 'www.vnch.vn','127.0.0.1','khaibaoyt-bvk.com']
 
 
 # Application definition
